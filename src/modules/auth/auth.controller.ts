@@ -43,20 +43,20 @@ class AuthController {
       if (result.message === 'Користувача з такими даними не знайдено') {
         return res.json(result);
       }
-
       res.cookie('access_token', result.accessToken, {
-        httpOnly: false,
-        secure: false,
-        sameSite: 'lax',
-        path: '/', // дуже важливо! зазвичай треба явно вказати path
-        maxAge: 15 * 60 * 1000, // 15 хв
+        httpOnly: true, // щоб JS не мав доступу
+        secure: true, // тільки HTTPS
+        sameSite: 'none', // крос-доменна авторизація
+        path: '/',
+        maxAge: 15 * 60 * 1000,
       });
+
       res.cookie('refresh_token', result.refreshToken, {
-        httpOnly: false,
-        secure: false,
-        sameSite: 'lax',
-        path: '/', // дуже важливо! зазвичай треба явно вказати path
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 днів
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none',
+        path: '/',
+        maxAge: 30 * 24 * 60 * 60 * 1000,
       });
       res.json(result);
     } catch (error) {
@@ -77,9 +77,9 @@ class AuthController {
 
       if (newAccessToken.accessToken) {
         res.cookie('access_token', newAccessToken.accessToken, {
-          httpOnly: false,
-          secure: false,
-          sameSite: 'lax',
+          httpOnly: true,
+          secure: true,
+          sameSite: 'none',
           path: '/', // дуже важливо! зазвичай треба явно вказати path
           maxAge: 15 * 60 * 1000, // 15 хв
         });
