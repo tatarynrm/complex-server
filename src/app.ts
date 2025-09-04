@@ -10,22 +10,34 @@ import bodyParser from 'body-parser';
 dotenv.config();
 
 const app = express();
+// const corsOptions = {
+//   origin: function (origin: string | undefined, callback: Function) {
+//     const allowedOrigins = [
+//       'http://localhost:3000',
+//       'http://localhost:3005',
+//       'https://complex.ict.lviv.ua',
+//       'http://91.239.235.132:3005',
+//     ];
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   credentials: true,
+// };
+
+
 const corsOptions = {
   origin: function (origin: string | undefined, callback: Function) {
-    const allowedOrigins = [
-      'http://localhost:3000',
-      'http://localhost:3005',
-      'https://complex.ict.lviv.ua',
-      'http://91.239.235.132:3005',
-    ];
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
+    // Якщо origin не вказаний (наприклад, прямий запит Postman) або ти хочеш дозволити всім
+    if (!origin) return callback(null, true);
+
+    callback(null, true); // дозволяє будь-який origin
   },
-  credentials: true,
+  credentials: true, // обов'язково для cookie
 };
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
