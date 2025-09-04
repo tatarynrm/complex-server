@@ -13,6 +13,7 @@ const io = new Server(server, {
       'http://localhost:3000',
       'http://localhost:3005',
       'https://complex.ict.lviv.ua',
+      'http://91.239.235.132:3005',
     ],
     credentials: true,
   },

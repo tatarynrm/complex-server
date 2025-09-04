@@ -16,6 +16,7 @@ const corsOptions = {
       'http://localhost:3000',
       'http://localhost:3005',
       'https://complex.ict.lviv.ua',
+      'http://91.239.235.132:3005',
     ];
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
