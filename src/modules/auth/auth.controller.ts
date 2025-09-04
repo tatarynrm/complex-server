@@ -45,14 +45,14 @@ class AuthController {
       }
 
       res.cookie('access_token', result.accessToken, {
-        httpOnly: true,
+        httpOnly: false,
         secure: false,
         sameSite: 'lax',
         path: '/', // дуже важливо! зазвичай треба явно вказати path
         maxAge: 15 * 60 * 1000, // 15 хв
       });
       res.cookie('refresh_token', result.refreshToken, {
-        httpOnly: true,
+        httpOnly: false,
         secure: false,
         sameSite: 'lax',
         path: '/', // дуже важливо! зазвичай треба явно вказати path
@@ -77,7 +77,7 @@ class AuthController {
 
       if (newAccessToken.accessToken) {
         res.cookie('access_token', newAccessToken.accessToken, {
-          httpOnly: true,
+          httpOnly: false,
           secure: false,
           sameSite: 'lax',
           path: '/', // дуже важливо! зазвичай треба явно вказати path
