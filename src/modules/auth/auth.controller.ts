@@ -47,13 +47,13 @@ class AuthController {
       res.cookie('access_token', result.accessToken, {
         httpOnly: true,
         secure: true,
-        sameSite: 'lax',
+        sameSite: 'none',
         maxAge: 15 * 60 * 1000, // 15 хв
       });
       res.cookie('refresh_token', result.refreshToken, {
         httpOnly: true,
         secure: true,
-        sameSite: 'lax',
+        sameSite: 'none',
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 днів
       });
       res.json(result);
@@ -77,7 +77,7 @@ class AuthController {
         res.cookie('access_token', newAccessToken.accessToken, {
           httpOnly: true,
           secure: true,
-          sameSite: 'lax',
+          sameSite: 'none',
           maxAge: 15 * 60 * 1000, // 15 хв
         });
 
