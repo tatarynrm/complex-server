@@ -101,8 +101,11 @@ class AuthController {
   async getMe(req: Request, res: Response) {
     const access_token = req.cookies.access_token;
     if (!access_token) return res.sendStatus(401);
+
     try {
       const result = await authService.getMe(access_token);
+
+      // ❗ Заборона кешування
       res.setHeader(
         'Cache-Control',
         'no-store, no-cache, must-revalidate, proxy-revalidate',
@@ -110,9 +113,14 @@ class AuthController {
       res.setHeader('Pragma', 'no-cache');
       res.setHeader('Expires', '0');
       res.setHeader('Surrogate-Control', 'no-store');
-      res.json(result);
+
+      return res.json(result);
     } catch (error) {
       console.log(error);
+      // Якщо токен невалідний або помилка сервера
+      res.clearCookie('access_token');
+      res.clearCookie('refresh_token');
+      return res.sendStatus(401);
     }
   }
   async logout(req: Request, res: Response) {
