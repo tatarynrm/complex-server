@@ -103,7 +103,13 @@ class AuthController {
     if (!access_token) return res.sendStatus(401);
     try {
       const result = await authService.getMe(access_token);
-
+      res.setHeader(
+        'Cache-Control',
+        'no-store, no-cache, must-revalidate, proxy-revalidate',
+      );
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+      res.setHeader('Surrogate-Control', 'no-store');
       res.json(result);
     } catch (error) {
       console.log(error);
