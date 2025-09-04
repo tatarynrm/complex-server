@@ -42,5 +42,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //   }),
 // );
 app.use(cors(corsOptions));
+
+
+
+app.get('/',async (req:Request,res:Response) =>{
+  res.json({
+    message:"Tataryn Roman.Server is running"
+  })
+})
 appRouterState(app);
 export default app;
