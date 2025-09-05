@@ -10,6 +10,7 @@ import { userController } from './user.controller';
 const router = Router();
 
 router.get('/all', userController.getUsers)
+router.put('/:id', userController.updateUser)
 
 
 

@@ -5,6 +5,11 @@ class UserController {
     const result = await userService.getUsers();
     res.json(result);
   }
+  async updateUser(req: Request, res: Response) {
+ 
+    const result = await userService.updateUser(req.body);
+    res.json(result);
+  }
 
 }
 
