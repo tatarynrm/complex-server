@@ -9,7 +9,7 @@ import { userController } from './user.controller';
 
 const router = Router();
 
-router.post('/user', userController.getUser)
+router.get('/all', userController.getUsers)
 
 
 
